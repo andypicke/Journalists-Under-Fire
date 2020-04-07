@@ -114,3 +114,39 @@ if __name__=='__main__':
     ax.set_title('# Journalists Killed Per Year')
 
     plt.savefig('./images/TotalDeathsVsYear.png', bbox_inches='tight')
+
+    #
+    plot_hbar_category_count_multiplecats(cpj, 'jobs', dropna=True)
+    plt.savefig('./images/TotalDeathsByJob.png',bbox_inches='tight')
+
+    #
+    plot_hbar_category_count_multiplecats(cpj, 'coverage', dropna=True)
+    plt.savefig('./images/TotalDeathsByCoverage.png',bbox_inches='tight')
+
+    #
+    cpj_GB_yeargender_count = cpj.groupby(['year','gender']).count().unstack(fill_value=0).stack().reset_index().loc[:,['year','gender','combinedStatus']]
+    cpj_GB_yeargender_count.rename(columns={'combinedStatus':'Count'},inplace=True)
+ 
+    fig, ax = plt.subplots(1,figsize=(12,6))
+    ax.bar(cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Female']['year'],cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Female']['Count'],color='red',label='female')
+    ax.bar(cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Male']['year'],cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Male']['Count'],color='blue', label='male',bottom=cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Female']['Count'])
+    ax.legend()
+    ax.set_title('# Journalists Killed Per Year')
+
+    plt.savefig('./images/TotalDeathsVsYear_GenderStack.png',bbox_inches='tight')
+
+    #
+    plot_hbar_category_count(cpj, 'country', 20)
+    plt.savefig('./images/TotalDeathsByCountry.png',bbox_inches='tight')
+
+    #
+    plot_hbar_category_count(cpj, 'primaryNationality',20)
+    plt.savefig('./images/TotalDeathsByNationality.png',bbox_inches='tight')
+
+    #
+    plot_hbar_category_count_multiplecats(cpj, 'sourcesOfFire', dropna=True)
+    plt.savefig('./images/TotalDeathsBysourcesOfFire.png',bbox_inches='tight')
+
+    #
+    plot_hbar_category_count(cpj, 'typeOfDeath', dropna=False)
+    plt.savefig('./images/TotalDeathsByTypeOfDeath.png',bbox_inches='tight')
