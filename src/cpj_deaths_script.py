@@ -95,14 +95,25 @@ def plot_hbar_category_count(df, col_name, topN=None, dropna=False):
     ax.invert_yaxis()
     return 
 
-
+def remove_spaces_in_category_lists(df, col_name):
+    '''
+    Remove spaces in rows of col_name where a list of categories (separated by commas) is given
+    
+    Example: ['Camera Operator, Internet Reporter, Print reporter'] > ['Camera Operator,Internet Reporter,Print reporter']
+    
+    '''
+    df[col_name] = df[col_name].apply(lambda x: x.replace(',  ',',') if type(x)==str else x)
+    df[col_name] = df[col_name].apply(lambda x: x.replace(', ',',') if type(x)==str else x)
+    return df
+    
 if __name__=='__main__':
 
     cpj = pd.read_csv('./data/Journalists Killed between 1992 and 2020.csv')
     cpj.dropna(axis=1, how='all', inplace=True)
     cpj.dropna(axis=1, thresh=1000, inplace=True)
     cpj.drop(['status','type','employedAs','location','locality'], axis=1, inplace=True)
-
+    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace('Broadcast reporter','Broadcast Reporter') if type(x)==str else x)
+    cpj = remove_spaces_in_category_lists(cpj, 'sourcesOfFire')
 
     # Plot Number of Journalists killed per year
     cpj_GB_year_count = category_count_df_one_column(cpj,'year')
