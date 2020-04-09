@@ -34,7 +34,7 @@ This raw data set has 4854 rows and 43 columns. The majority of the columns are 
 
 - Drop any columns that contain all null values, or very few non-null values.
 - Further narrow data by dropping columns that don't contain useful imformation for analysis.
-- Use only cases w/ confirmed motive for journalist deaths.
+- Use only cases w/ confirmed motive for journalist deaths; there were 1369 confirmed cases.
 - There were many instances, especially in the journalists imprisoned dataset, where a category value was entered in multiple different ways (capitalization, spaces etc.) and needed to be cleaned up before analysis.
 - There were several categorical columns that contained rows listing multiple categories (as a single string). I had to separate these before I could aggregate/count. 
 
@@ -84,10 +84,10 @@ This raw data set has 4854 rows and 43 columns. The majority of the columns are 
 ![](images/TotalDeathsByTypeOfDeath.png)
 
 ## There does seem to be an general upward trend in the number of journalists imprisoned over time. Note the increase around 1995, similar to what we saw in the number of journalist deaths.
-![](images/N_imprisonedByYear.png)
+![](images/N_ImprisonedByYear.png)
 
 ## The distribution by country is very different from that for journalist deaths. China and Turkey are significantly worse, followed by Eritrea and Iran.
-![](images/N_imprisonedBycountry.png)
+![](images/N_ImprisonedBycountry.png)
 
 
 ## Map of total imprisoned by country since 1992
@@ -99,14 +99,14 @@ This raw data set has 4854 rows and 43 columns. The majority of the columns are 
 
 
 ## 
-![](images/N_imprisonedBycoverage.png)
+![](images/N_ImprisonedBycoverage.png)
 
 ## The most common charge is by far 'Anti-State'
-![](images/N_imprisonedBycharges.png)
+![](images/N_ImprisonedBycharges.png)
 
-![](images/N_imprisonedByjobs.png)
-![](images/N_imprisonedBymedium.png)
-![](images/N_imprisonedBylengthOfSentence.png)
+![](images/N_ImprisonedByjobs.png)
+![](images/N_ImprisonedBymedium.png)
+![](images/N_ImprisonedBylengthOfSentence.png)
 
 
 # Summary
