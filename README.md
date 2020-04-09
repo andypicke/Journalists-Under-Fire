@@ -42,105 +42,14 @@ This data set has x rows and x columns. The majority of the columns are categori
 
 
 ### Glimpse of final journalist deaths dataframe
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+|    |   year | fullName           | gender   | employedAs   | jobs           | coverage                  | mediums   | country   | localOrForeign   | charges    | lengthOfSentence
+|---:|-------:|:-------------------|:---------|:-------------|:---------------|:--------------------------|:----------|:----------|:-----------------|:-----------|:-------------------|
+|  0 |   2018 | Aasif Sultan       | Male     | Staff        | Print Reporter | Human Rights,Politics,War | Print     | India     | Local            | Anti-State | Sentence pending   |
+|  1 |   2019 | Aasif Sultan       | Male     | Staff        | Print Reporter | Human Rights,Politics,War | Print     | India     | Local            | Anti-State | Sentence pending   |
+|  2 |   1997 | Abay Hailu         | Male     | Staff        | Print Reporter | Human Rights,Politics     | Print     | Ethiopia  | Local            | nan        | 0-5 Years          |
+|  3 |   1993 | Abbas Abdi         | Male     | nan          | Editor         | nan                       | Print     | Iran      | Local            | nan        | 0-5 Years          |
+|  4 |   2011 | Abd al-Karim Thail | Male     | Staff        | Editor         | Politics                  | Internet  | Yemen     | Local            | No Charge  | Not Sentenced      |
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year</th>
-      <th>fullName</th>
-      <th>gender</th>
-      <th>typeOfDeath</th>
-      <th>jobs</th>
-      <th>coverage</th>
-      <th>mediums</th>
-      <th>country</th>
-      <th>localOrForeign</th>
-      <th>sourcesOfFire</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>4</th>
-      <td>2018</td>
-      <td>Abadullah Hananzai</td>
-      <td>Male</td>
-      <td>Murder</td>
-      <td>Producer</td>
-      <td>Crime,Politics,War</td>
-      <td>Radio,Internet</td>
-      <td>Afghanistan</td>
-      <td>Local</td>
-      <td>Political Group</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>1998</td>
-      <td>Abay Hailu</td>
-      <td>Male</td>
-      <td>Dangerous Assignment</td>
-      <td>Print Reporter</td>
-      <td>Human Rights,Politics</td>
-      <td>Print</td>
-      <td>Ethiopia</td>
-      <td>Local</td>
-      <td>Government Officials</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2012</td>
-      <td>Abd al-Karim al-Ezzo</td>
-      <td>Male</td>
-      <td>Crossfire</td>
-      <td>Camera Operator</td>
-      <td>War</td>
-      <td>Internet</td>
-      <td>Syria</td>
-      <td>Local</td>
-      <td>Military Officials</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>1996</td>
-      <td>Abdallah Bouhachek</td>
-      <td>Male</td>
-      <td>Murder</td>
-      <td>Editor</td>
-      <td>Politics</td>
-      <td>Print</td>
-      <td>Algeria</td>
-      <td>Local</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2013</td>
-      <td>Abdel Aziz Mahmoud Hasoun</td>
-      <td>Male</td>
-      <td>Crossfire</td>
-      <td>Internet Reporter</td>
-      <td>Human Rights,Politics,War</td>
-      <td>Internet</td>
-      <td>Syria</td>
-      <td>Local</td>
-      <td>Military Officials</td>
-    </tr>
-  </tbody>
-</table>
-</div>
 
 ### Glimpse of final journalist imprisoned dataframe
 <div>
