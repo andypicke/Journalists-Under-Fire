@@ -42,6 +42,15 @@ This data set has x rows and x columns. The majority of the columns are categori
 
 
 ### Glimpse of final journalist deaths dataframe
+|    |   year | fullName                  | gender   | typeOfDeath          | jobs              | coverage                  | mediums        | country     | localOrForeign   | sourcesOfFire        |
+|---:|-------:|:--------------------------|:---------|:---------------------|:------------------|:--------------------------|:---------------|:------------|:-----------------|:---------------------|
+|  4 |   2018 | Abadullah Hananzai        | Male     | Murder               | Producer          | Crime,Politics,War        | Radio,Internet | Afghanistan | Local            | Political Group      |
+|  5 |   1998 | Abay Hailu                | Male     | Dangerous Assignment | Print Reporter    | Human Rights,Politics     | Print          | Ethiopia    | Local            | Government Officials |
+|  6 |   2012 | Abd al-Karim al-Ezzo      | Male     | Crossfire            | Camera Operator   | War                       | Internet       | Syria       | Local            | Military Officials   |
+|  7 |   1996 | Abdallah Bouhachek        | Male     | Murder               | Editor            | Politics                  | Print          | Algeria     | Local            | nan                  |
+|  8 |   2013 | Abdel Aziz Mahmoud Hasoun | Male     | Crossfire            | Internet Reporter | Human Rights,Politics,War | Internet       | Syria       | Local            | Military Officials   |
+
+### Glimpse of final journalist imprisoned dataframe
 |    |   year | fullName           | gender   | employedAs   | jobs           | coverage                  | mediums   | country   | localOrForeign   | charges    | lengthOfSentence
 |---:|-------:|:-------------------|:---------|:-------------|:---------------|:--------------------------|:----------|:----------|:-----------------|:-----------|:-------------------|
 |  0 |   2018 | Aasif Sultan       | Male     | Staff        | Print Reporter | Human Rights,Politics,War | Print     | India     | Local            | Anti-State | Sentence pending   |
@@ -51,112 +60,8 @@ This data set has x rows and x columns. The majority of the columns are categori
 |  4 |   2011 | Abd al-Karim Thail | Male     | Staff        | Editor         | Politics                  | Internet  | Yemen     | Local            | No Charge  | Not Sentenced      |
 
 
-### Glimpse of final journalist imprisoned dataframe
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year</th>
-      <th>fullName</th>
-      <th>gender</th>
-      <th>employedAs</th>
-      <th>jobs</th>
-      <th>coverage</th>
-      <th>mediums</th>
-      <th>country</th>
-      <th>localOrForeign</th>
-      <th>charges</th>
-      <th>lengthOfSentence</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2018</td>
-      <td>Aasif Sultan</td>
-      <td>Male</td>
-      <td>Staff</td>
-      <td>Print Reporter</td>
-      <td>Human Rights,Politics,War</td>
-      <td>Print</td>
-      <td>India</td>
-      <td>Local</td>
-      <td>Anti-State</td>
-      <td>Sentence pending</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2019</td>
-      <td>Aasif Sultan</td>
-      <td>Male</td>
-      <td>Staff</td>
-      <td>Print Reporter</td>
-      <td>Human Rights,Politics,War</td>
-      <td>Print</td>
-      <td>India</td>
-      <td>Local</td>
-      <td>Anti-State</td>
-      <td>Sentence pending</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1997</td>
-      <td>Abay Hailu</td>
-      <td>Male</td>
-      <td>Staff</td>
-      <td>Print Reporter</td>
-      <td>Human Rights,Politics</td>
-      <td>Print</td>
-      <td>Ethiopia</td>
-      <td>Local</td>
-      <td>NaN</td>
-      <td>0-5 Years</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1993</td>
-      <td>Abbas Abdi</td>
-      <td>Male</td>
-      <td>NaN</td>
-      <td>Editor</td>
-      <td>NaN</td>
-      <td>Print</td>
-      <td>Iran</td>
-      <td>Local</td>
-      <td>NaN</td>
-      <td>0-5 Years</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2011</td>
-      <td>Abd al-Karim Thail</td>
-      <td>Male</td>
-      <td>Staff</td>
-      <td>Editor</td>
-      <td>Politics</td>
-      <td>Internet</td>
-      <td>Yemen</td>
-      <td>Local</td>
-      <td>No Charge</td>
-      <td>Not Sentenced</td>
-    </tr>
-  </tbody>
-</table>
-</div>
 
 
 
