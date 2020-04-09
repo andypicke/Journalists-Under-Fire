@@ -1,11 +1,11 @@
 # Journalists-Under-Fire
-An analysis of attacks on journalists and press freedom.
+An analysis of threats to journalists and press freedom.
 
 **IN PROGRESS**
 
 # Overview
 
-A free press is a vital component of deomcracy. 
+A free press is a vital component of democracy. 
 
 Some of the questions I had in mind when conducting the analysis included:
 - Are there any trends over time? Has being a journalist become more or less dangerous?
@@ -24,10 +24,10 @@ The [Committee to Protect Journalists](https://cpj.org/) (CPJ) maintains a world
 ## Description of Raw Data
 
 ### Journalist Deaths since 1992
-This data set has x rows and x columns. The majority of the columns are categorical in nature. 
+This raw data set had 2033 rows and 43 columns. The majority of the columns are categorical in nature. 
 
 ### Journalists Imprisoned since 1992
-This data set has x rows and x columns. The majority of the columns are categorical in nature. 
+This raw data set has 4854 rows and 43 columns. The majority of the columns are categorical in nature. 
 
 
 ## Data Cleaning and Manipulation
@@ -36,9 +36,7 @@ This data set has x rows and x columns. The majority of the columns are categori
 - Further narrow data by dropping columns that don't contain useful imformation for analysis.
 - Use only cases w/ confirmed motive for journalist deaths.
 - There were many instances, especially in the journalists imprisoned dataset, where a category value was entered in multiple different ways (capitalization, spaces etc.) and needed to be cleaned up before analysis.
-- There were several categorical columns that contained rows listing multiple categories (as a single string). I had to separate these before I could aggregate/count. *insert example?*
-
-* Show head(df) for final cleaned dataframes?
+- There were several categorical columns that contained rows listing multiple categories (as a single string). I had to separate these before I could aggregate/count. 
 
 
 ### Glimpse of final journalist deaths dataframe
@@ -61,14 +59,9 @@ This data set has x rows and x columns. The majority of the columns are categori
 
 
 
-
-
-
-
-
 # Analysis/Results
 
-## There doesn't appear to be a consistent trend in the number of journalists killed over time. We see a spike in the early 1990's (why?Bosnian war?), and then another general increase from ~2003-2018.
+## There doesn't appear to be a consistent trend in the number of journalists killed over time. We see a spike in the early 1990's (why?), and then another general increase from ~2003-2018.
 ![](images/TotalDeathsVsYear.png)
 
 ## Looking at the distribution by country, the top 2 are Iraq and Syria, where there have been recent wars. 
@@ -77,8 +70,7 @@ This data set has x rows and x columns. The majority of the columns are categori
 ## Map of total number of deaths by country, 1992-present.
 ![](images/DeathsByCountryMap.png)
 
-
-## gif! shows counts each year
+## Animation showing total journlist deaths per country for each year
 ![](images/DeathByCountry.gif)
 
 
@@ -101,7 +93,7 @@ This data set has x rows and x columns. The majority of the columns are categori
 ## Map of total imprisoned by country since 1992
 ![](images/ImprisonedByCountryMap.png)
 
-## gif! shows counts each year
+## Animation showing total journlists imprisoned per country for each year
 ![](images/ImprisonedByCountry.gif)
 
 
