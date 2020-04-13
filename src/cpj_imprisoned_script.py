@@ -40,27 +40,12 @@ def add_category_counts_to_df(df, col_name, dropna=False):
 
 def count_categories(df, col_name, dropna=False):
     '''
+    Return a dataframe with sums of all columns starting with 'col_name' (specifically those made w/ add_category_counts_to_df function)
     '''
     df_count=add_category_counts_to_df(df, col_name, dropna)
     df_count=df_count.filter(regex='^' + col_name, axis=1).sum().to_frame(name='Count').reset_index().rename(columns={'index':col_name}).sort_values('Count',ascending=False)
     df_count[col_name]=df_count[col_name].apply(lambda x: x.replace(col_name +'_',''))
     return df_count
-
-
-def plot_hbar_category_count_multiplecats(df, col_name, topN=None, dropna=False):
-    '''
-    Make a horizontal bar chart of category counts for a specified column in dataframe
-    '''
-    df_count = count_categories(df, col_name, dropna)
-    fig, ax = plt.subplots(1,figsize=(12,8))
-    ax.barh(df_count[col_name], df_count['Count'])
-    ax.set_xlabel('# Journalists Imprisoned')
-    if topN:
-        ax.set_title('# Journalists Imprisoned By ' + col_name + ' (Top ' + str(topN) +')')
-    else:
-        ax.set_title('# Journalists Imprisoned By ' + col_name)
-    ax.invert_yaxis()
-    return 
 
 
 def remove_spaces_in_category_lists(df, col_name):
@@ -93,12 +78,14 @@ def category_count_df_one_column(df, col_name, topN=None ,dropna=False):
     return df_count
 
 
-def plot_hbar_category_count(df, col_name, topN=None, dropna=False):
+def plot_hbar_category_count_multiplecats(df, col_name, topN=None, dropna=False):
     '''
-    Make a horizontal bar chart of category counts for a specified column in dataframe
+    Make a horizontal bar chart of category counts for a specified column in dataframe. 
+    This function is specifically designed for columns that contain a string list of several
+    values. See functions add_category_counts_to_df and count_categories
     '''
-    df_count = category_count_df_one_column(df, col_name, topN, dropna=False)
-    fig, ax = plt.subplots(1,figsize=(12,8))
+    df_count = count_categories(df, col_name, dropna)
+    _, ax = plt.subplots(1,figsize=(12,8))
     ax.barh(df_count[col_name], df_count['Count'])
     ax.set_xlabel('# Journalists Imprisoned')
     if topN:
@@ -109,82 +96,106 @@ def plot_hbar_category_count(df, col_name, topN=None, dropna=False):
     return 
 
 
+def plot_hbar_category_count(df, col_name, topN=None, dropna=False):
+    '''
+    Make a horizontal bar chart of category counts for a specified column in dataframe
+    '''
+    df_count = category_count_df_one_column(df, col_name, topN, dropna=False)
+    _, ax = plt.subplots(1,figsize=(12,8))
+    ax.barh(df_count[col_name], df_count['Count'])
+    ax.set_xlabel('# Journalists Imprisoned')
+    if topN:
+        ax.set_title('# Journalists Imprisoned By ' + col_name + ' (Top ' + str(topN) +')')
+    else:
+        ax.set_title('# Journalists Imprisoned By ' + col_name)
+    ax.invert_yaxis()
+    return 
+
+
+def clean_cpj_imprisoned(df):
+    df.dropna(axis=1, how='all', inplace=True)
+    df.dropna(axis=1, thresh=1000, inplace=True)
+    df.drop(['combinedStatus','lastStatus','status','primaryNationality','organizations','healthProblems','sentence','locationImprisoned','type'], axis=1, inplace=True)
+    df['employedAs'] = cpj['employedAs'].apply(lambda x: x.replace('staff','Staff') if type(x)==str else x)
+    
+    df = remove_spaces_in_category_lists(df, 'jobs')
+    df['jobs'] = df['jobs'].apply(lambda x: x.replace('print reporter','Print Reporter') if type(x)==str else x)
+    df['jobs'] = df['jobs'].apply(lambda x: x.replace('Print reporter','Print Reporter') if type(x)==str else x)
+    df['jobs'] = df['jobs'].apply(lambda x: x.replace('Broadcast reporter','Broadcast Reporter') if type(x)==str else x)
+    df['jobs'] = df['jobs'].apply(lambda x: x.replace(' Broadcast Reporter','Broadcast Reporter') if type(x)==str else x)
+    df['jobs'] = df['jobs'].apply(lambda x: x.replace('Publisher/owner','Publisher/Owner') if type(x)==str else x)
+    df['jobs'] = df['jobs'].apply(lambda x: x.replace('Internet reporter','Internet Reporter') if type(x)==str else x)
+    df['jobs'] = df['jobs'].apply(lambda x: x.replace('Documentary filmmaker','Documentary Filmmaker') if type(x)==str else x)
+    df['jobs'] = df['jobs'].apply(lambda x: x.replace('Columnist/commentator','Columnist/Commentator') if type(x)==str else x)
+    df['jobs'] = df['jobs'].apply(lambda x: x.replace(' Editor','Editor') if type(x)==str else x)
+    df['jobs'] = df['jobs'].apply(lambda x: x.replace('Camera operator','Camera Operator') if type(x)==str else x)
+
+    df = remove_spaces_in_category_lists(df, 'coverage')
+    df['coverage'] = df['coverage'].apply(lambda x: x.replace('Human rights','Human Rights') if type(x)==str else x)
+    df['coverage'] = df['coverage'].apply(lambda x: x.replace('Human Rights`','Human Rights') if type(x)==str else x)
+    df['coverage'] = df['coverage'].apply(lambda x: x.replace('politics','Politics') if type(x)==str else x)
+    df['coverage'] = df['coverage'].apply(lambda x: x.replace('sports','Sports') if type(x)==str else x)
+
+    df = remove_spaces_in_category_lists(df, 'mediums')
+    df['mediums'] = df['mediums'].apply(lambda x: x.replace('print','Print') if type(x)==str else x)
+
+    df = remove_spaces_in_category_lists(df, 'charges')
+    df['charges'] = df['charges'].apply(lambda x: x.replace('False news','False News') if type(x)==str else x)
+    df['charges'] = df['charges'].apply(lambda x: x.replace('false news','False News') if type(x)==str else x)
+    df['charges'] = df['charges'].apply(lambda x: x.replace('Censorship violation','Censorship Violation') if type(x)==str else x)
+    df['charges'] = df['charges'].apply(lambda x: x.replace('No charge','No Charge') if type(x)==str else x)
+    df['charges'] = df['charges'].apply(lambda x: x.replace('No Charge disclosed','No Charge') if type(x)==str else x)
+    df['charges'] = df['charges'].apply(lambda x: x.replace('Ethnic/Religious Insult','Ethnic or Religious Insult') if type(x)==str else x)
+    df['charges'] = df['charges'].apply(lambda x: x.replace('Ethnic or religious insult','Ethnic or Religious Insult') if type(x)==str else x)
+    df['charges'] = df['charges'].apply(lambda x: x.replace('Religious or ethnic insult','Ethnic or Religious Insult') if type(x)==str else x)
+    df['charges'] = df['charges'].apply(lambda x: x.replace('retaliatory','Retaliatory') if type(x)==str else x)
+    df['charges'] = df['charges'].apply(lambda x: x.replace('Anti-state','Anti-State') if type(x)==str else x)
+
+    df['lengthOfSentence'] = df['lengthOfSentence'].apply(lambda x: x.replace('Not sentenced','Not Sentenced') if type(x)==str else x)
+    df['lengthOfSentence'] = df['lengthOfSentence'].apply(lambda x: x.replace('not sentenced','Not Sentenced') if type(x)==str else x)
+    df['lengthOfSentence'] = df['lengthOfSentence'].apply(lambda x: x.replace('not Sentenced','Not Sentenced') if type(x)==str else x)
+    df['lengthOfSentence'] = df['lengthOfSentence'].apply(lambda x: x.replace('5-10 years','5-10 Years') if type(x)==str else x)
+    df['lengthOfSentence'] = df['lengthOfSentence'].apply(lambda x: x.replace('0-5 years','0-5 Years') if type(x)==str else x)
+    df['lengthOfSentence'] = df['lengthOfSentence'].apply(lambda x: x.replace('0-5 years','0-5 Years') if type(x)==str else x)
+    df['lengthOfSentence'] = df['lengthOfSentence'].apply(lambda x: x.replace('10+ years','10+ Years') if type(x)==str else x)
+    df['lengthOfSentence'] = df['lengthOfSentence'].apply(lambda x: x.replace('5 years to <10 years','5-10 Years') if type(x)==str else x)
+    df['lengthOfSentence'] = df['lengthOfSentence'].apply(lambda x: x.replace('1 year to <5 years','0-5 Years') if type(x)==str else x)
+    df['lengthOfSentence'] = df['lengthOfSentence'].apply(lambda x: x.replace('<1 year','0-5 Years') if type(x)==str else x)
+
+    return df
+
+
 if __name__=='__main__':
 
     cpj = pd.read_csv('./data/Journalists Imprisoned between 1992 and 2020.csv')
-    cpj.dropna(axis=1, how='all', inplace=True)
-    cpj.dropna(axis=1, thresh=1000, inplace=True)
-    cpj.drop(['combinedStatus','lastStatus','status'], axis=1, inplace=True)
-    cpj.drop('type', axis=1, inplace=True)
-    cpj['employedAs'] = cpj['employedAs'].apply(lambda x: x.replace('staff','Staff') if type(x)==str else x)
+    cpj = clean_cpj_imprisoned(cpj)
     
-    cpj = remove_spaces_in_category_lists(cpj, 'jobs')
-    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace('print reporter','Print Reporter') if type(x)==str else x)
-    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace('Print reporter','Print Reporter') if type(x)==str else x)
-    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace('Broadcast reporter','Broadcast Reporter') if type(x)==str else x)
-    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace(' Broadcast Reporter','Broadcast Reporter') if type(x)==str else x)
-    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace('Publisher/owner','Publisher/Owner') if type(x)==str else x)
-    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace('Internet reporter','Internet Reporter') if type(x)==str else x)
-    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace('Documentary filmmaker','Documentary Filmmaker') if type(x)==str else x)
-    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace('Columnist/commentator','Columnist/Commentator') if type(x)==str else x)
-    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace(' Editor','Editor') if type(x)==str else x)
-    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace('Camera operator','Camera Operator') if type(x)==str else x)
-
-    cpj = remove_spaces_in_category_lists(cpj, 'coverage')
-    cpj['coverage'] = cpj['coverage'].apply(lambda x: x.replace('Human rights','Human Rights') if type(x)==str else x)
-    cpj['coverage'] = cpj['coverage'].apply(lambda x: x.replace('Human Rights`','Human Rights') if type(x)==str else x)
-    cpj['coverage'] = cpj['coverage'].apply(lambda x: x.replace('politics','Politics') if type(x)==str else x)
-    cpj['coverage'] = cpj['coverage'].apply(lambda x: x.replace('sports','Sports') if type(x)==str else x)
-
-    cpj = remove_spaces_in_category_lists(cpj, 'mediums')
-    cpj['mediums'] = cpj['mediums'].apply(lambda x: x.replace('print','Print') if type(x)==str else x)
-
-    cpj = remove_spaces_in_category_lists(cpj, 'charges')
-    cpj['charges'] = cpj['charges'].apply(lambda x: x.replace('False news','False News') if type(x)==str else x)
-    cpj['charges'] = cpj['charges'].apply(lambda x: x.replace('false news','False News') if type(x)==str else x)
-    cpj['charges'] = cpj['charges'].apply(lambda x: x.replace('Censorship violation','Censorship Violation') if type(x)==str else x)
-    cpj['charges'] = cpj['charges'].apply(lambda x: x.replace('No charge','No Charge') if type(x)==str else x)
-    cpj['charges'] = cpj['charges'].apply(lambda x: x.replace('No Charge disclosed','No Charge') if type(x)==str else x)
-    cpj['charges'] = cpj['charges'].apply(lambda x: x.replace('Ethnic/Religious Insult','Ethnic or Religious Insult') if type(x)==str else x)
-    cpj['charges'] = cpj['charges'].apply(lambda x: x.replace('Ethnic or religious insult','Ethnic or Religious Insult') if type(x)==str else x)
-    cpj['charges'] = cpj['charges'].apply(lambda x: x.replace('Religious or ethnic insult','Ethnic or Religious Insult') if type(x)==str else x)
-    cpj['charges'] = cpj['charges'].apply(lambda x: x.replace('retaliatory','Retaliatory') if type(x)==str else x)
-    cpj['charges'] = cpj['charges'].apply(lambda x: x.replace('Anti-state','Anti-State') if type(x)==str else x)
-
-    cpj['lengthOfSentence'] = cpj['lengthOfSentence'].apply(lambda x: x.replace('Not sentenced','Not Sentenced') if type(x)==str else x)
-    cpj['lengthOfSentence'] = cpj['lengthOfSentence'].apply(lambda x: x.replace('not sentenced','Not Sentenced') if type(x)==str else x)
-    cpj['lengthOfSentence'] = cpj['lengthOfSentence'].apply(lambda x: x.replace('not Sentenced','Not Sentenced') if type(x)==str else x)
-    cpj['lengthOfSentence'] = cpj['lengthOfSentence'].apply(lambda x: x.replace('5-10 years','5-10 Years') if type(x)==str else x)
-    cpj['lengthOfSentence'] = cpj['lengthOfSentence'].apply(lambda x: x.replace('0-5 years','0-5 Years') if type(x)==str else x)
-    cpj['lengthOfSentence'] = cpj['lengthOfSentence'].apply(lambda x: x.replace('0-5 years','0-5 Years') if type(x)==str else x)
-    cpj['lengthOfSentence'] = cpj['lengthOfSentence'].apply(lambda x: x.replace('10+ years','10+ Years') if type(x)==str else x)
-    cpj['lengthOfSentence'] = cpj['lengthOfSentence'].apply(lambda x: x.replace('5 years to <10 years','5-10 Years') if type(x)==str else x)
-    cpj['lengthOfSentence'] = cpj['lengthOfSentence'].apply(lambda x: x.replace('1 year to <5 years','0-5 Years') if type(x)==str else x)
-    cpj['lengthOfSentence'] = cpj['lengthOfSentence'].apply(lambda x: x.replace('<1 year','0-5 Years') if type(x)==str else x)
-
-    cpj['healthProblems'] = cpj['healthProblems'].apply(lambda x: x.replace('no','No') if type(x)==str else x)
-
-    plot_hbar_category_count_multiplecats(cpj, 'jobs')
+    #
+    plot_hbar_category_count_multiplecats(cpj, 'jobs', dropna=True)
     plt.savefig('./images/N_ImprisonedByjobs.png', bbox_inches='tight')
 
-    plot_hbar_category_count_multiplecats(cpj, 'coverage')
+    #
+    plot_hbar_category_count_multiplecats(cpj, 'coverage', dropna=True)
     plt.savefig('./images/N_ImprisonedBycoverage.png', bbox_inches='tight')
 
-    plot_hbar_category_count_multiplecats(cpj, 'mediums')
+    #
+    plot_hbar_category_count_multiplecats(cpj, 'mediums', dropna=True)
     plt.savefig('./images/N_ImprisonedBymedium.png', bbox_inches='tight')
 
-    plot_hbar_category_count_multiplecats(cpj, 'charges')
+    #
+    plot_hbar_category_count_multiplecats(cpj, 'charges', dropna=True)
     plt.savefig('./images/N_ImprisonedBycharges.png', bbox_inches='tight')
 
+    #
     plot_hbar_category_count(cpj, 'country', 20)
     plt.savefig('./images/N_ImprisonedBycountry.png', bbox_inches='tight')
 
-    plot_hbar_category_count_multiplecats(cpj, 'lengthOfSentence')
+    #
+    plot_hbar_category_count_multiplecats(cpj, 'lengthOfSentence', dropna=True)
     plt.savefig('./images/N_ImprisonedBylengthOfSentence.png', bbox_inches='tight')
 
     # Plot Number of Journalists imprisoned per year
     cpj_GB_year_count = category_count_df_one_column(cpj,'year')
-
     _, ax = plt.subplots(1,figsize=(12,4))
     ax.bar(cpj_GB_year_count['year'],cpj_GB_year_count['Count'])
     ax.set_title('# Journalists Imprisoned Per Year')
