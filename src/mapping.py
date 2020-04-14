@@ -10,6 +10,15 @@ import imageio
 def make_Choropleth_map(geo_data, count_df, legend_name, bins=None):
     '''
     Make a Chorpleth map w/ folium
+
+    INPUTS
+    geo_data (str) : *Filepath* to geojson file needed to make Choropleth map
+    count_df (Pandas dataframe) : Dataframe with columns 'country' and 'count' (value being mapped)
+    legend_name (str) : Legend name
+    bins (list) : Bins to use for colormap (default=None, bins set automatically).  
+
+    OUTPUT
+    m : Folium map
     '''
     m = folium.Map(location=[30, 0], zoom_start=2, tiles='CartoDB positron')
 

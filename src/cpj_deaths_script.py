@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
 # make plots look nice
 plt.rcParams['font.size'] = 14
 plt.rcParams['axes.labelsize'] = 'large'
@@ -9,7 +8,6 @@ plt.rcParams['xtick.labelsize'] = 'large'
 plt.rcParams['ytick.labelsize'] = 'large'
 plt.rcParams['lines.linewidth'] = 3
 plt.style.use('ggplot')
-
 
 def get_unique_category_vals(df, col_name, dropna=False):
     '''
@@ -113,17 +111,20 @@ def plot_hbar_category_count(df, col_name, topN=None, dropna=False):
     return 
 
 
+def clean_cpj_deaths(df):
+    df.dropna(axis=1, how='all', inplace=True)
+    df.dropna(axis=1, thresh=1000, inplace=True)
+    df = df[df['motiveConfirmed']=='Confirmed']
+    df.drop(['status','type','employedAs','location','locality','primaryNationality','organizations','motiveConfirmed','combinedStatus'], axis=1, inplace=True)
+    df['jobs'] = df['jobs'].apply(lambda x: x.replace('Broadcast reporter','Broadcast Reporter') if type(x)==str else x)
+    df = remove_spaces_in_category_lists(df, 'sourcesOfFire')
+    return df
+
+
 if __name__=='__main__':
 
     cpj = pd.read_csv('./data/Journalists Killed between 1992 and 2020.csv')
-    cpj.dropna(axis=1, how='all', inplace=True)
-    cpj.dropna(axis=1, thresh=1000, inplace=True)
-    cpj = cpj[cpj['motiveConfirmed']=='Confirmed']
-    cpj.drop(['status','type','employedAs','location','locality'], axis=1, inplace=True)
-    cpj.drop(['primaryNationality','organizations','motiveConfirmed','combinedStatus'], axis=1, inplace=True)
-    cpj['jobs'] = cpj['jobs'].apply(lambda x: x.replace('Broadcast reporter','Broadcast Reporter') if type(x)==str else x)
-    cpj = remove_spaces_in_category_lists(cpj, 'sourcesOfFire')
-    
+    cpj = clean_cpj_deaths(cpj)
 
     # Plot Number of Journalists killed per year
     cpj_GB_year_count = category_count_df_one_column(cpj,'year')
@@ -143,23 +144,23 @@ if __name__=='__main__':
     plt.savefig('./images/TotalDeathsByCoverage.png',bbox_inches='tight')
 
     #
-    cpj_GB_yeargender_count = cpj.groupby(['year','gender']).count().unstack(fill_value=0).stack().reset_index().loc[:,['year','gender','combinedStatus']]
-    cpj_GB_yeargender_count.rename(columns={'combinedStatus':'Count'},inplace=True)
+    #cpj_GB_yeargender_count = cpj.groupby(['year','gender']).count().unstack(fill_value=0).stack().reset_index().loc[:,['year','gender','combinedStatus']]
+    #cpj_GB_yeargender_count.rename(columns={'combinedStatus':'Count'},inplace=True)
  
-    fig, ax = plt.subplots(1,figsize=(12,6))
-    ax.bar(cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Female']['year'],cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Female']['Count'],color='red',label='female')
-    ax.bar(cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Male']['year'],cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Male']['Count'],color='blue', label='male',bottom=cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Female']['Count'])
-    ax.legend()
-    ax.set_title('# Journalists Killed Per Year')
-    plt.savefig('./images/TotalDeathsVsYear_GenderStack.png',bbox_inches='tight')
+    #fig, ax = plt.subplots(1,figsize=(12,6))
+    #ax.bar(cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Female']['year'],cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Female']['Count'],color='red',label='female')
+    #ax.bar(cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Male']['year'],cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Male']['Count'],color='blue', label='male',bottom=cpj_GB_yeargender_count[cpj_GB_yeargender_count['gender']=='Female']['Count'])
+    #ax.legend()
+    #ax.set_title('# Journalists Killed Per Year')
+    #plt.savefig('./images/TotalDeathsVsYear_GenderStack.png',bbox_inches='tight')
 
     #
     plot_hbar_category_count(cpj, 'country', 20)
     plt.savefig('./images/TotalDeathsByCountry.png',bbox_inches='tight')
 
     #
-    plot_hbar_category_count(cpj, 'primaryNationality',20)
-    plt.savefig('./images/TotalDeathsByNationality.png',bbox_inches='tight')
+    #plot_hbar_category_count(cpj, 'primaryNationality',20)
+    #plt.savefig('./images/TotalDeathsByNationality.png',bbox_inches='tight')
 
     #
     plot_hbar_category_count_multiplecats(cpj, 'sourcesOfFire', dropna=True)
