@@ -1,8 +1,6 @@
 # Journalists-Under-Fire
 An analysis of global threats to journalists and press freedom.
 
-**IN PROGRESS**
-
 # Overview
 
 A free press and access to timely, factual information is a vital component of any democracy. I decided to analyze global data on journalist deaths and imprisonment with the goal of identifying patterns and trends in threats to journalists and the free press. Some of the questions I had in mind when conducting the analysis included:
@@ -70,8 +68,7 @@ After the data cleaning process:
 ### Looking at the distribution by country, the top 2 are Iraq and Syria, where there have been recent wars. 
 ![](images/TotalDeathsByCountry.png)
 
-
-### Animation showing total journlist deaths per country for each year
+### Maps showing total journlist deaths per country for each year
 ![](images/DeathByCountry.gif)
 
 
@@ -82,18 +79,22 @@ After the data cleaning process:
 ![](images/TotalDeathsBysourcesOfFire.png)
 ![](images/TotalDeathsByTypeOfDeath.png)
 
+
+
 ## Journalists Imprisoned
 
 
-### There does seem to be an general upward trend in the number of journalists imprisoned over time. Note the increase around 1995, similar to what we saw in the number of journalist deaths.
+### Number of journalists imprisoned over time
+In contrast to journalist deaths, there seems to be a more consistent general upward trend in the number of journalists imprisoned over time. Note the increase around 1995, similar to what we saw in the number of journalist deaths.
 ![](images/N_ImprisonedByYear.png)
 
 
-### The distribution by country is very different from that for journalist deaths. China and Turkey are significantly worse, followed by Eritrea and Iran.
+### Distribution by country
+The distribution by country is very different from that for journalist deaths. China and Turkey are significantly worse, followed by Eritrea and Iran.
 ![](images/N_ImprisonedBycountry.png)
 
 
-### Animation showing total journlists imprisoned per country for each year
+### Maps of total journlists imprisoned per country for each year
 ![](images/ImprisonedByCountry.gif)
 
 
