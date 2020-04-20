@@ -1,15 +1,13 @@
 # Journalists-Under-Fire
-An analysis of threats to journalists and press freedom.
+An analysis of global threats to journalists and press freedom.
 
 **IN PROGRESS**
 
 # Overview
 
-A free press is a vital component of democracy. 
-
-Some of the questions I had in mind when conducting the analysis included:
+A free press and access to timely, factual information is a vital component of any democracy. I decided to analyze global data on journalist deaths and imprisonment with the goal of identifying patterns and trends in threats to journalists and the free press. Some of the questions I had in mind when conducting the analysis included:
 - Are there any trends over time? Has being a journalist become more or less dangerous?
-- Spatial trends; which countries are the most dangerous for journalists?
+- Spatial trends: which countries are the most dangerous for journalists?
 - What types of issues are most dangerous to cover?
 - What specific jobs are the most dangerous?
 - What are the most common sources of attacks on journalists?
@@ -17,29 +15,32 @@ Some of the questions I had in mind when conducting the analysis included:
 
 # Data 
 
-## Sources
-The [Committee to Protect Journalists](https://cpj.org/) (CPJ) maintains a worldwide [database](https://cpj.org/data/) of press workers killed or imprisoned since 1992, and information/circumstances surrounding each event.
+The [Committee to Protect Journalists](https://cpj.org/) (CPJ) maintains a worldwide [database](https://cpj.org/data/) of press workers killed or imprisoned since 1992, and information/circumstances surrounding each event. I downloaded the data in csv format in early April 2020. There were two datasets:
 
+1) Journalist Deaths since 1992
+This raw data set had 2033 rows and 43 columns.
+2) Journalists Imprisoned since 1992
+This raw data set had 4854 rows and 43 columns. 
 
-## Description of Raw Data
-
-### Journalist Deaths since 1992
-This raw data set had 2033 rows and 43 columns. The majority of the columns are categorical in nature. 
-
-### Journalists Imprisoned since 1992
-This raw data set has 4854 rows and 43 columns. The majority of the columns are categorical in nature. 
+The majority of the features/columns in both datasets are categorical in nature. 
 
 
 ## Data Cleaning and Manipulation
 
 - Drop any columns that contain all null values, or very few non-null values.
 - Further narrow data by dropping columns that don't contain useful imformation for analysis.
-- Use only cases w/ confirmed motive for journalist deaths; there were 1369 confirmed cases.
-- There were many instances, especially in the journalists imprisoned dataset, where a category value was entered in multiple different ways (capitalization, spaces etc.) and needed to be cleaned up before analysis.
-- There were several categorical columns that contained rows listing multiple categories (as a single string). I had to separate these before I could aggregate/count. 
+- Use only cases w/ confirmed motive for journalist deaths; there were 1369 cases with confirmed motives.
+- There were many instances, especially in the journalists imprisoned dataset, where a category value was entered in multiple different ways (different capitalization, spaces etc.) and needed to be cleaned up before analysis.
+- There were several categorical columns that contained rows listing multiple categories (as a single string). I had to separate these before I could aggregate/count those features. 
+
+After the data cleaning process:
+- The journalist deaths dataset contained 1369 rows and x columns
+- The journalists imprisoned dataset contained 4854 rows and x columns.
 
 
-### Glimpse of final journalist deaths dataframe
+## Glimpse of final dataframes used for analysis:
+
+### Journalist deaths 
 |    |   year | fullName                  | gender   | typeOfDeath          | jobs              | coverage                  | mediums        | country     | localOrForeign   | sourcesOfFire        |
 |---:|-------:|:--------------------------|:---------|:---------------------|:------------------|:--------------------------|:---------------|:------------|:-----------------|:---------------------|
 |  4 |   2018 | Abadullah Hananzai        | Male     | Murder               | Producer          | Crime,Politics,War        | Radio,Internet | Afghanistan | Local            | Political Group      |
@@ -48,7 +49,7 @@ This raw data set has 4854 rows and 43 columns. The majority of the columns are 
 |  7 |   1996 | Abdallah Bouhachek        | Male     | Murder               | Editor            | Politics                  | Print          | Algeria     | Local            | nan                  |
 |  8 |   2013 | Abdel Aziz Mahmoud Hasoun | Male     | Crossfire            | Internet Reporter | Human Rights,Politics,War | Internet       | Syria       | Local            | Military Officials   |
 
-### Glimpse of final journalist imprisoned dataframe
+### Journalists imprisoned 
 |    |   year | fullName           | gender   | employedAs   | jobs           | coverage                  | mediums   | country   | localOrForeign   | charges    | lengthOfSentence
 |---:|-------:|:-------------------|:---------|:-------------|:---------------|:--------------------------|:----------|:----------|:-----------------|:-----------|:-------------------|
 |  0 |   2018 | Aasif Sultan       | Male     | Staff        | Print Reporter | Human Rights,Politics,War | Print     | India     | Local            | Anti-State | Sentence pending   |
@@ -108,9 +109,8 @@ This raw data set has 4854 rows and 43 columns. The majority of the columns are 
 
 # Summary
 - A large number of journalists are in danger of being killed or imprisoned.
-- Journalist deaths are largely related to wars.
-- In contrast, journalist imprisonment appears to be largely related to political coverage and anti-state charges.
-- 
+- Trends in journalist deaths tend to reflect the occurences of armed conflicts/wars, and involve journalists covering those conflicts.
+- In contrast, trends in journalist imprisonments appear to be largely related to political coverage and anti-state charges.
 
 
 
