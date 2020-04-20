@@ -32,8 +32,8 @@ The majority of the features/columns in both datasets are categorical in nature.
 - There were several categorical columns that contained rows listing multiple categories (as a single string). I had to separate these before I could aggregate/count those features. 
 
 After the data cleaning process:
-- The journalist deaths dataset contained 1369 rows and x columns
-- The journalists imprisoned dataset contained 4854 rows and x columns.
+- The journalist deaths dataset contained 1369 rows and 10 columns
+- The journalists imprisoned dataset contained 4854 rows and 11 columns.
 
 
 ## Glimpse of final dataframes used for analysis:
@@ -62,13 +62,15 @@ After the data cleaning process:
 
 ## Journalist Deaths 
 
-### There doesn't appear to be a consistent trend in the number of journalists killed over time. We see a spike in the early 1990's (why?), and then another general increase from ~2003-2018.
+### Number of journalist deaths over time
+There doesn't appear to be a consistent trend in the number of journalists killed over time. We see a spike in the early 1990's (why?), and then another general increase from ~2003-2018.
 ![](images/TotalDeathsVsYear.png)
 
 ### Looking at the distribution by country, the top 2 are Iraq and Syria, where there have been recent wars. 
 ![](images/TotalDeathsByCountry.png)
 
-### Maps showing total journlist deaths per country for each year
+### Maps of journalist deaths per country
+The following animation shows maps of journalist deaths per country for each year, and allows us to see how the geographical pattern changes over time.
 ![](images/DeathByCountry.gif)
 
 
