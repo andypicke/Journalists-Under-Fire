@@ -79,10 +79,13 @@ The following animation shows maps of journalist deaths per country for each yea
 
 ### Distribution by type of coverage
 - The most dangerous topics to cover are politics, war, human rights, and corruption.
+- Sports??
 ![](images/TotalDeathsByCoverage.png)
 
-
+### Sources of Fire
 ![](images/TotalDeathsBysourcesOfFire.png)
+
+### Type of Death
 ![](images/TotalDeathsByTypeOfDeath.png)
 
 
