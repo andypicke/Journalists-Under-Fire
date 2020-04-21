@@ -62,19 +62,23 @@ After the data cleaning process:
 
 ## Journalist Deaths 
 
-### Number of journalist deaths over time
-There doesn't appear to be a consistent trend in the number of journalists killed over time. We see a spike in the early 1990's (why?), and then another general increase from ~2003-2018.
+### Patterns over time
+- There doesn't appear to be a consistent trend in the number of journalists killed over time. 
+- We see a spike in the early 1990's which appears to be largely related to the [Algerian Civil War](https://en.wikipedia.org/wiki/Algerian_Civil_War
+- There is another general increase in journalist deaths from ~2003-2018.
 ![](images/TotalDeathsVsYear.png)
 
-### Looking at the distribution by country, the top 2 are Iraq and Syria, where there have been recent wars. 
+### Distribution by country
+Looking at the distribution by country, the top 2 are Iraq and Syria, where there have been prolonged wars. 
 ![](images/TotalDeathsByCountry.png)
 
 ### Maps of journalist deaths per country
-The following animation shows maps of journalist deaths per country for each year, and allows us to see how the geographical pattern changes over time.
+The following animation shows maps of journalist deaths per country for each year, and allows us to see how the geographical pattern changes over time. Note the color scale is the same for each year to allow comparison, and the year shown is indicated in the legend below the colorbar. 
 ![](images/DeathByCountry.gif)
 
 
-### Looking at the distribution by type of coverage, the most dangerous topics to cover are politics, war, human rights, and corruption.
+### Distribution by type of coverage
+- The most dangerous topics to cover are politics, war, human rights, and corruption.
 ![](images/TotalDeathsByCoverage.png)
 
 
@@ -87,26 +91,30 @@ The following animation shows maps of journalist deaths per country for each yea
 
 
 ### Number of journalists imprisoned over time
-In contrast to journalist deaths, there seems to be a more consistent general upward trend in the number of journalists imprisoned over time. Note the increase around 1995, similar to what we saw in the number of journalist deaths.
+- In contrast to journalist deaths, there seems to be a more consistent general upward trend in the number of journalists imprisoned over time. 
+- Note the increase around 1995, similar to what we saw in the number of journalist deaths. Was this largely due to Ageria also?
 ![](images/N_ImprisonedByYear.png)
 
 
 ### Distribution by country
-The distribution by country is very different from that for journalist deaths. China and Turkey are significantly worse, followed by Eritrea and Iran.
+- The distribution by country is very different from that for journalist deaths. 
+- China and Turkey are significantly worse, followed by Eritrea and Iran.
 ![](images/N_ImprisonedBycountry.png)
 
 
 ### Maps of total journlists imprisoned per country for each year
+The following animation shows maps of journalist imprisonments per country for each year, and allows us to see how the geographical pattern changes over time. Note the color scale is the same for each year to allow comparison, and the year shown is indicated in the legend below the colorbar.
 ![](images/ImprisonedByCountry.gif)
 
 
-### Coverage
+### Distribution by type of Coverage
 ![](images/N_ImprisonedBycoverage.png)
 
-### The most common charge is by far 'Anti-State'
+### Distribution of charges
+- The most common charge is by far 'Anti-State'
 ![](images/N_ImprisonedBycharges.png)
 
-### Length of Sentence
+### Length of Sentences
 ![](images/N_ImprisonedBylengthOfSentence.png)
 
 
