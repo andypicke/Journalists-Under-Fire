@@ -1,6 +1,8 @@
 # Journalists-Under-Fire
 An analysis of global threats to journalists and press freedom.
 
+If you have any questions, comments, or suggestions please feel free to get in touch at andypicke@gmail.com, or open up an issue via github.
+
 # Overview
 
 A free press and access to timely, factual information is a vital component of any democracy. I decided to analyze global data on journalist deaths and imprisonment with the goal of identifying patterns and trends in threats to journalists and the free press. Some of the questions I had in mind when conducting the analysis included:
