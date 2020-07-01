@@ -17,10 +17,8 @@ A free press and access to timely, factual information is a vital component of a
 
 The [Committee to Protect Journalists](https://cpj.org/) (CPJ) maintains a worldwide [database](https://cpj.org/data/) of press workers killed or imprisoned since 1992, and information/circumstances surrounding each event. I downloaded the data in csv format in early April 2020. There were two datasets:
 
-1) Journalist Deaths since 1992
-This raw data set had 2033 rows and 43 columns.
-2) Journalists Imprisoned since 1992
-This raw data set had 4854 rows and 43 columns. 
+1) Journalist Deaths since 1992. This raw data set had 2033 rows and 43 columns.
+2) Journalists Imprisoned since 1992. This raw data set had 4854 rows and 43 columns. 
 
 The majority of the features/columns in both datasets are categorical in nature. 
 
@@ -66,7 +64,7 @@ After the data cleaning process:
 
 ### Patterns over time
 - There doesn't appear to be a consistent trend in the number of journalists killed over time. 
-- We see a spike in the early 1990's which appears to be largely related to the [Algerian Civil War](https://en.wikipedia.org/wiki/Algerian_Civil_War
+- We see a spike in the early 1990's which appears to be largely related to the [Algerian Civil War](https://en.wikipedia.org/wiki/Algerian_Civil_War)
 - There is another general increase in journalist deaths from ~2003-2018.
 ![](images/TotalDeathsVsYear.png)
 
